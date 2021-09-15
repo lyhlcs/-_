@@ -3,18 +3,25 @@
 import re
 
 
-def write_to_ans(data_list, num, answer):
+def write_to_ans(data_list, num, answer):  # 将一行中找到的敏感词写到文件中
     for item in data_list:
         answer.write("Line"+num+item+'\n')
 
 
-def start_to_find(path1):
+def start_to_find(path1):  # 将敏感词读出并写入列表
     with open(path1, 'rt', encoding='utf-8') as file:
         word_list = list()
         for line in file.readlines():
             if line is not None:
                 word_list.append(line.strip('\n'))
     return word_list
+
+
+"""
+寻找敏感词 使用正则表达式 
+首先直接寻找无变形的敏感词
+其次使用正则表达式 首个字符与尾部字符做界限 找到匹配即认为有敏感词
+"""
 
 
 def serach_sensitive_word(path1, path2, path3):
